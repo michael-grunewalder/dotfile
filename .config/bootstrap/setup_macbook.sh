@@ -58,6 +58,7 @@ packages=(
     "--cask arc"
     "--cask google-chrome"
     "--cask firefox"
+    "--cask dbngin"
     "--cask textmate"
 )
 
