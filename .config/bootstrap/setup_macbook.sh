@@ -87,3 +87,4 @@ rm -rf ~/.zshrc
 #yadm clone git@github.com:michael-grunewalder/dotfile.git
 yadm clone https://github.com/michael-grunewalder/dotfile.git
 yadm status
+yadm checkout -f
