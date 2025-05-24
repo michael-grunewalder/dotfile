@@ -83,7 +83,7 @@ echo "Installation of Homebrew Apps complete!"
 echo "***************************************************DONE************************************"
 
 echo "Getting configuration from YADM"
-rm -rf ~/.zshrc
+#rm -rf ~/.zshrc
 #yadm clone git@github.com:michael-grunewalder/dotfile.git
 yadm clone https://github.com/michael-grunewalder/dotfile.git
 yadm status
