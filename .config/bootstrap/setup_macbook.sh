@@ -97,4 +97,5 @@ yadm clone https://github.com/michael-grunewalder/dotfile.git
 yadm status
 yadm checkout -f
 
+defaults write 'Apple Global Domain' AppleMenuBarVisibleInFullscreen -bool false && defaults write 'Apple Global Domain' _HIHideMenuBar -bool true
 brew services start sketchybar
