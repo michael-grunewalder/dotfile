@@ -9,6 +9,7 @@ source_if_exists $HOME/.config/zsh/history.zsh
 source_if_exists $HOME/.config/zsh/zsh/git.zsh
 # source_if_exists ~/.fzf.zsh
 source_if_exists $HOME/.config/zsh/aliases.zsh
+source_if_exists $HOME/.config/zsh/functions.zsh
 
 precmd() {
     source $HOME/.config/zsh/aliases.zsh
