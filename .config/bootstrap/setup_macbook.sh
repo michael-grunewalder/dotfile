@@ -6,6 +6,7 @@ then
     echo "Homebrew not found. Installing..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     eval "$(/opt/homebrew/bin/brew shellenv)"
+    export PATH="/opt/homebrew/bin:$PATH"
 else
     echo "Homebrew is already installed."
 fi
@@ -16,6 +17,24 @@ brew update
 
 # List of packages to install
 packages=(
+"--cask ghostty"
+    "--cask font-hack-nerd-font"
+    "--cask sf-symbols"
+    "--cask font-meslo-lg-nerd-font"
+    "--cask sublime-text"
+    "--cask font-sf-mono"
+    "--cask visual-studio-code"
+    "--cask font-sf-pro"
+    "--cask warp"
+    "--cask font-sketchybar-app-font"
+    "--cask appcleaner"
+    "--cask herd"
+    "--cask opera-air"
+    "--cask arc"
+    "--cask google-chrome"
+    "--cask firefox"
+    "--cask dbngin"
+    "--cask textmate"
     "screenresolution"
     "eza"
     "sketchybar"
@@ -42,24 +61,6 @@ packages=(
 	"yazi"
 	"font-symbols-only-nerd-font"
     "--no-quarantine grishka/grishka/neardrop"
-    "--cask ghostty"
-    "--cask font-hack-nerd-font"
-    "--cask sf-symbols"
-    "--cask font-meslo-lg-nerd-font"
-    "--cask sublime-text"
-    "--cask font-sf-mono"
-    "--cask visual-studio-code"
-    "--cask font-sf-pro"
-    "--cask warp"
-    "--cask font-sketchybar-app-font"
-    "--cask appcleaner"
-    "--cask herd"
-    "--cask opera-air"
-    "--cask arc"
-    "--cask google-chrome"
-    "--cask firefox"
-    "--cask dbngin"
-    "--cask textmate"
 )
 
 # Install packages
@@ -69,6 +70,11 @@ do
     echo "Installing $package..."
     brew install $package
 done
+echo "Upgrading packages..."
+brew upgrade
+echo "Installation of Homebrew Apps complete!"
+echo "***************************************************DONE************************************"
+
 
 echo "Installing Apple AppStore Applications"
 echo "SnailGit Lite"
@@ -80,12 +86,6 @@ mas install 1352778147
 echo "Core Tunnel"
 mas install 1354318707
 echo "Important Apps installed"
-echo "***************************************************DONE************************************"
-
-# Upgrade packages
-echo "Upgrading packages..."
-brew upgrade
-echo "Installation of Homebrew Apps complete!"
 echo "***************************************************DONE************************************"
 
 echo "Getting configuration from YADM"
