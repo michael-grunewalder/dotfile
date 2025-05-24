@@ -22,7 +22,7 @@ brew install yadm
 echo "Getting configuration from YADM"
 #rm -rf ~/.zshrc
 #yadm clone git@github.com:michael-grunewalder/dotfile.git
-yadm clone https://github.com/michael-grunewalder/dotfile.git
+yadm clone "https://${GITHUB_TOKEN}@github.com/michael-grunewalder/dotfile.git"
 yadm status
 yadm checkout -f
 
@@ -59,6 +59,7 @@ brew install resvg
 brew install imagemagick
 brew install yazi
 brew install font-symbols-only-nerd-font
+brew install lua
 
 #####uncomment this f you want to use Android phones again
 # brew install --no-quarantine grishka/grishka/neardrop
@@ -117,4 +118,10 @@ defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool truescreen -bool false && defaults write 'Apple Global Domain' _HIHideMenuBar -bool true
+
+#######Menu Bar:
+curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+(git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
+
+
 brew services start sketchybar
