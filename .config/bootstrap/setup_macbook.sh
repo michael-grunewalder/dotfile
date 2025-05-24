@@ -48,7 +48,7 @@ echo "Installing packages..."
 for package in "${packages[@]}"
 do
     echo "Installing $package..."
-    brew install "$package"
+    brew install $package
 done
 
 # Upgrade packages
