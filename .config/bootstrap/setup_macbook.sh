@@ -35,6 +35,7 @@ packages=(
     "--cask firefox"
     "--cask dbngin"
     "--cask textmate"
+    "--cask setapp"
     "screenresolution"
     "eza"
     "sketchybar"
