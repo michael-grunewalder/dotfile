@@ -65,6 +65,7 @@ packages=(
 
 # Install packages
 echo "Installing packages..."
+brew tap FelixKratz/formulae
 for package in "${packages[@]}"
 do
     echo "Installing $package..."
@@ -94,3 +95,5 @@ echo "Getting configuration from YADM"
 yadm clone https://github.com/michael-grunewalder/dotfile.git
 yadm status
 yadm checkout -f
+
+brew services start sketchybar
