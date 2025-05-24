@@ -53,7 +53,8 @@ packages=(
     "--cask warp"
     "--cask font-sketchybar-app-font"
     "--cask appcleaner"
-	"--cask textmate"
+    "--cask herd
+    "--cask textmate"
 )
 
 # Install packages
