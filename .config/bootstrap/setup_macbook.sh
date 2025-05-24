@@ -84,5 +84,6 @@ echo "***************************************************DONE*******************
 
 echo "Getting configuration from YADM"
 rm -rf ~/.zshrc
-yadm clone git@github.com:michael-grunewalder/dotfile.git
+#yadm clone git@github.com:michael-grunewalder/dotfile.git
+yadm clone https://github.com/michael-grunewalder/dotfile.git
 yadm status
