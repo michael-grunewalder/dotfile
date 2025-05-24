@@ -54,6 +54,10 @@ packages=(
     "--cask font-sketchybar-app-font"
     "--cask appcleaner"
     "--cask herd"
+    "--cask opera-air"
+    "--cask arc"
+    "--cask google-chrome"
+    "--cask firefox"
     "--cask textmate"
 )
 
