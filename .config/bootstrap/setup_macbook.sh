@@ -29,6 +29,18 @@ packages=(
     "neofetch"
     "nowplaying-cli"
     "yadm"
+	"ffmpeg"
+	"sevenzip"
+	"jq"
+	"poppler"
+	"fd"
+	"ripgrep"
+	"fzf"
+	"zoxide"
+	"resvg"
+	"imagemagick"
+	"yazi"
+	"font-symbols-only-nerd-font"
     "--no-quarantine grishka/grishka/neardrop"
     "--cask ghostty"
     "--cask font-hack-nerd-font"
@@ -41,6 +53,7 @@ packages=(
     "--cask warp"
     "--cask font-sketchybar-app-font"
     "--cask appcleaner"
+	"--cask textmate"
 )
 
 # Install packages
@@ -71,4 +84,3 @@ echo "Getting configuration from YADM"
 rm -rf ~/.zshrc
 yadm clone git@github.com:michael-grunewalder/dotfile.git
 yadm status
-
