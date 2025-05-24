@@ -8,13 +8,9 @@ source_if_exists $HOME/.config/zsh/env.zsh
 source_if_exists $HOME/.config/zsh/history.zsh
 source_if_exists $HOME/.config/zsh/zsh/git.zsh
 # source_if_exists ~/.fzf.zsh
-source_if_exists $HOME/.config/zsh/zsh/aliases.zsh
+source_if_exists $HOME/.config/zsh/aliases.zsh
 
 precmd() {
-    source $HOME/.config/zsh/zsh/aliases.zsh
+    source $HOME/.config/zsh/aliases.zsh
 }
-
-
-export PATH="$PATH:/usr/local/sbin:$DOTFILES/bin:$HOME/.local/bin:$DOTFILES/scripts/"
-
 eval "$(starship init zsh)"
