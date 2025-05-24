@@ -1,17 +1,5 @@
 #!/bin/bash
 
-echo "Installing Apple AppStore Applications"
-echo "SnailGit Lite"
-mas install 1099475282
-echo "Transmit 5"
-mas install 1436522307
-echo "Bitwarden"
-mas install 1352778147
-echo "Core Tunnel"
-mas install 1354318707
-echo "Important Apps installed"
-echo "***************************************************DONE************************************"
-
 # Check if Homebrew is already installed
 if ! command -v brew &> /dev/null
 then
@@ -75,6 +63,18 @@ do
     echo "Installing $package..."
     brew install $package
 done
+
+echo "Installing Apple AppStore Applications"
+echo "SnailGit Lite"
+mas install 1099475282
+echo "Transmit 5"
+mas install 1436522307
+echo "Bitwarden"
+mas install 1352778147
+echo "Core Tunnel"
+mas install 1354318707
+echo "Important Apps installed"
+echo "***************************************************DONE************************************"
 
 # Upgrade packages
 echo "Upgrading packages..."
