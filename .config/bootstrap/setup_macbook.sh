@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e  # Exit on error
 
+echo "Getting configuration from YADM"
+if [ -z "$GITHUB_TOKEN" ]; then
+    echo "ERROR: GITHUB_TOKEN is not set. Please set it before running this script."
+    exit 1
+fi
+
 # Install XCode CMD Tools and wait for completion
 echo "Installing commandline tools..."
 xcode-select --install 2>/dev/null || true
@@ -39,11 +45,6 @@ echo "Installing YADM..."
 brew install yadm || { echo "Failed to install YADM"; exit 1; }
 
 # Clone dotfiles repository
-echo "Getting configuration from YADM"
-if [ -z "$GITHUB_TOKEN" ]; then
-    echo "ERROR: GITHUB_TOKEN is not set. Please set it before running this script."
-    exit 1
-fi
 
 # Clone the dotfiles repository
 yadm clone "https://${GITHUB_TOKEN}@github.com/michael-grunewalder/dotfile.git" || { echo "Failed to clone dotfiles"; exit 1; }
