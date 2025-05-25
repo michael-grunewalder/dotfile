@@ -68,7 +68,6 @@ echo "Installing Homebrew packages..."
 BREW_PACKAGES=(
     "screenresolution"
     "eza"
-    "sketchybar"
     "fzf"
     "mas"
     "starship"
@@ -91,7 +90,6 @@ BREW_PACKAGES=(
     "font-symbols-only-nerd-font"
     "lua"
 )
-
 for package in "${BREW_PACKAGES[@]}"; do
     echo "Installing $package..."
     brew install "$package" || echo "Failed to install $package, continuing..."
@@ -175,9 +173,10 @@ defaults write 'Apple Global Domain' _HIHideMenuBar -bool true
 
 # Menu Bar setup
 echo "Setting up Menu Bar..."
+brew tap FelixKratz/formulae
+brew install sketchybar
 curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
 (git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
-
 # Start sketchybar service
 echo "Starting sketchybar service..."
 brew services start sketchybar
