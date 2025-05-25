@@ -1,10 +1,16 @@
 #!/bin/bash
 
 #######################Install XCode CMD Tools
+
 echo "Installing commandline tools..."
-xcode-select --install
+xcode-select --install 2>/dev/null
+until xcode-select -p &>/dev/null; do
+  echo "Waiting for Xcode Command Line Tools to be installed..."
+  sleep 5
+done
 
 # Check if Homebrew is already installed
+
 if ! command -v brew &> /dev/null
 then
     echo "Homebrew not found. Installing..."
@@ -18,23 +24,19 @@ fi
 ###################Installing YADM to get the configurations
 brew install yadm
 
-
 echo "Getting configuration from YADM"
-#rm -rf ~/.zshrc
-#yadm clone git@github.com:michael-grunewalder/dotfile.git
 yadm clone "https://${GITHUB_TOKEN}@github.com/michael-grunewalder/dotfile.git"
 yadm status
 yadm checkout -f
 
 ##################PPLY THE CONDFIGURATION
-source ~/.config/zsh/env.zsh
 
-
-# Update Homebrew
-echo "Updating Homebrew..."
-brew update
+if [ -f ~/.config/zsh/env.zsh ]; then
+  source ~/.config/zsh/env.zsh
+fi
 
 ################Installing apps from  Homebrew
+
 brew install screenresolution
 brew install eza
 brew install sketchybar
@@ -65,29 +67,34 @@ brew install lua
 # brew install --no-quarantine grishka/grishka/neardrop
 
 ################Installing CASKS
-brew install --cask --no-quarantine ghostty
-brew install --cask --no-quarantine font-hack-nerd-font
-brew install --cask --no-quarantine sf-symbols
-brew install --cask --no-quarantine font-meslo-lg-nerd-font
-brew install --cask --no-quarantine sublime-text
-brew install --cask --no-quarantine font-sf-mono
-brew install --cask --no-quarantine visual-studio-code
-brew install --cask --no-quarantine font-sf-pro
-brew install --cask --no-quarantine warp
-brew install --cask --no-quarantine font-sketchybar-app-font
-brew install --cask --no-quarantine appcleaner
-brew install --cask --no-quarantine herd
-brew install --cask --no-quarantine opera-air
-brew install --cask --no-quarantine arc
-brew install --cask --no-quarantine google-chrome
-brew install --cask --no-quarantine firefox
-brew install --cask --no-quarantine dbngin
-brew install --cask --no-quarantine textmate
-brew install --cask --no-quarantine setapp
+
+brew install --cask ghostty
+brew install --cask font-hack-nerd-font
+brew install --cask sf-symbols
+brew install --cask font-meslo-lg-nerd-font
+brew install --cask sublime-text
+brew install --cask font-sf-mono
+brew install --cask visual-studio-code
+brew install --cask font-sf-pro
+brew install --cask warp
+brew install --cask font-sketchybar-app-font
+brew install --cask appcleaner
+brew install --cask herd
+brew install --cask opera-air
+brew install --cask arc
+brew install --cask google-chrome
+brew install --cask firefox
+brew install --cask dbngin
+brew install --cask textmate
+brew install --cask setapp
 
 echo "Installation of Homebrew Apps complete!"
 echo "***************************************************DONE************************************"
 
+if ! mas account &>/dev/null; then
+  echo "Please log in to the Mac App Store before continuing."
+  mas signin --dialog
+fi
 
 echo "Installing Apple AppStore Applications"
 echo "SnailGit Lite"
@@ -117,7 +124,8 @@ defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool truescreen -bool false && defaults write 'Apple Global Domain' _HIHideMenuBar -bool true
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool truescreen -bool false
+defaults write 'Apple Global Domain' _HIHideMenuBar -bool true
 
 #######Menu Bar:
 curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
