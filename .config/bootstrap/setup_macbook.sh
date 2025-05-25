@@ -1,116 +1,165 @@
 #!/bin/bash
+set -e  # Exit on error
 
-#######################Install XCode CMD Tools
-
+# Install XCode CMD Tools and wait for completion
 echo "Installing commandline tools..."
-xcode-select --install 2>/dev/null
+xcode-select --install 2>/dev/null || true
+echo "Waiting for Xcode Command Line Tools to complete installation..."
 until xcode-select -p &>/dev/null; do
-  echo "Waiting for Xcode Command Line Tools to be installed..."
   sleep 5
 done
+echo "Xcode Command Line Tools installation complete."
 
 # Check if Homebrew is already installed
-
 if ! command -v brew &> /dev/null
 then
     echo "Homebrew not found. Installing..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    export PATH="/opt/homebrew/bin:$PATH"
+
+    # Handle different architectures (Apple Silicon vs Intel)
+    if [[ $(uname -m) == 'arm64' ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+        export PATH="/opt/homebrew/bin:$PATH"
+    else
+        eval "$(/usr/local/bin/brew shellenv)"
+        export PATH="/usr/local/bin:$PATH"
+    fi
 else
     echo "Homebrew is already installed."
+    # Ensure brew is in PATH regardless
+    if [[ $(uname -m) == 'arm64' ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    else
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
 fi
 
-###################Installing YADM to get the configurations
-brew install yadm
+# Installing YADM to get the configurations
+echo "Installing YADM..."
+brew install yadm || { echo "Failed to install YADM"; exit 1; }
 
+# Clone dotfiles repository
 echo "Getting configuration from YADM"
-yadm clone "https://${GITHUB_TOKEN}@github.com/michael-grunewalder/dotfile.git"
+if [ -z "$GITHUB_TOKEN" ]; then
+    echo "ERROR: GITHUB_TOKEN is not set. Please set it before running this script."
+    exit 1
+fi
+
+# Clone the dotfiles repository
+yadm clone "https://${GITHUB_TOKEN}@github.com/michael-grunewalder/dotfile.git" || { echo "Failed to clone dotfiles"; exit 1; }
 yadm status
 yadm checkout -f
 
-##################PPLY THE CONDFIGURATION
-
+# Source configuration if it exists
 if [ -f ~/.config/zsh/env.zsh ]; then
-  source ~/.config/zsh/env.zsh
+    echo "Sourcing environment configuration..."
+    source ~/.config/zsh/env.zsh
+else
+    echo "Warning: ~/.config/zsh/env.zsh not found, skipping."
 fi
 
-################Installing apps from  Homebrew
+# Update Homebrew
+echo "Updating Homebrew..."
+brew update
 
-brew install screenresolution
-brew install eza
-brew install sketchybar
-brew install fzf
-brew install mas
-brew install starship
-brew install midnight-commander
-brew install switchaudio-osx
-brew install tmux
-brew install jesseduffield/lazygit/lazygit
-brew install neofetch
-brew install nowplaying-cli
-brew install ffmpeg
-brew install sevenzip
-brew install jq
-brew install poppler
-brew install fd
-brew install ripgrep
-brew install fzf
-brew install zoxide
-brew install resvg
-brew install imagemagick
-brew install yazi
-brew install font-symbols-only-nerd-font
-brew install lua
+# Installing apps from Homebrew
+echo "Installing Homebrew packages..."
+BREW_PACKAGES=(
+    "screenresolution"
+    "eza"
+    "sketchybar"
+    "fzf"
+    "mas"
+    "starship"
+    "midnight-commander"
+    "switchaudio-osx"
+    "tmux"
+    "jesseduffield/lazygit/lazygit"
+    "neofetch"
+    "nowplaying-cli"
+    "ffmpeg"
+    "sevenzip"
+    "jq"
+    "poppler"
+    "fd"
+    "ripgrep"
+    "zoxide"
+    "resvg"
+    "imagemagick"
+    "yazi"
+    "font-symbols-only-nerd-font"
+    "lua"
+)
 
-#####uncomment this f you want to use Android phones again
-# brew install --no-quarantine grishka/grishka/neardrop
+for package in "${BREW_PACKAGES[@]}"; do
+    echo "Installing $package..."
+    brew install "$package" || echo "Failed to install $package, continuing..."
+done
 
-################Installing CASKS
+# Installing casks
+echo "Installing cask applications..."
+BREW_CASKS=(
+    "ghostty"
+    "font-hack-nerd-font"
+    "sf-symbols"
+    "font-meslo-lg-nerd-font"
+    "sublime-text"
+    "font-sf-mono"
+    "visual-studio-code"
+    "font-sf-pro"
+    "warp"
+    "font-sketchybar-app-font"
+    "appcleaner"
+    "herd"
+    "opera-air"
+    "arc"
+    "google-chrome"
+    "firefox"
+    "dbngin"
+    "textmate"
+    "setapp"
+)
 
-brew install --cask ghostty
-brew install --cask font-hack-nerd-font
-brew install --cask sf-symbols
-brew install --cask font-meslo-lg-nerd-font
-brew install --cask sublime-text
-brew install --cask font-sf-mono
-brew install --cask visual-studio-code
-brew install --cask font-sf-pro
-brew install --cask warp
-brew install --cask font-sketchybar-app-font
-brew install --cask appcleaner
-brew install --cask herd
-brew install --cask opera-air
-brew install --cask arc
-brew install --cask google-chrome
-brew install --cask firefox
-brew install --cask dbngin
-brew install --cask textmate
-brew install --cask setapp
+for cask in "${BREW_CASKS[@]}"; do
+    echo "Installing $cask..."
+    brew install --cask "$cask" || echo "Failed to install $cask, continuing..."
+done
 
 echo "Installation of Homebrew Apps complete!"
-echo "***************************************************DONE************************************"
+echo "****DONE****"
 
+# Check if user is logged into Mac App Store
+echo "Checking Mac App Store login..."
 if ! mas account &>/dev/null; then
-  echo "Please log in to the Mac App Store before continuing."
-  mas signin --dialog
+    echo "Please log in to the Mac App Store before continuing."
+    open -a "App Store"
+    echo "Press Enter after logging in to the Mac App Store..."
+    read -r
 fi
 
+# Installing Mac App Store applications
 echo "Installing Apple AppStore Applications"
-echo "SnailGit Lite"
-mas install 1099475282
-echo "Transmit 5"
-mas install 1436522307
-echo "Bitwarden"
-mas install 1352778147
-echo "Core Tunnel"
-mas install 1354318707
-echo "Important Apps installed"
-echo "***************************************************DONE************************************"
+MAS_APPS=(
+    "1099475282:SnailGit Lite"
+    "1436522307:Transmit 5"
+    "1352778147:Bitwarden"
+    "1354318707:Core Tunnel"
+)
 
+for app in "${MAS_APPS[@]}"; do
+    id="${app%%:*}"
+    name="${app#*:}"
+    echo "Installing $name..."
+    mas install "$id" || echo "Failed to install $name, continuing..."
+done
+
+echo "Important Apps installed"
+echo "****DONE****"
+
+# Changing macOS defaults
 echo "Changing macOS defaults..."
 defaults write NSGlobalDomain _HIHideMenuBar -bool true
-defaults write NSGlobalDomain AppleHighlightColor -string "0.65098 0.85490 0.58431"
+defaults write NSGlobalDomain AppleHighlightColor -string "0.47 0.65 0.9"
 defaults write NSGlobalDomain AppleAccentColor -int 1
 defaults write com.apple.screencapture location -string "$HOME/Desktop"
 defaults write com.apple.screencapture disable-shadow -bool false
@@ -124,12 +173,16 @@ defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool truescreen -bool false
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 defaults write 'Apple Global Domain' _HIHideMenuBar -bool true
 
-#######Menu Bar:
+# Menu Bar setup
+echo "Setting up Menu Bar..."
 curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
 (git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
 
-
+# Start sketchybar service
+echo "Starting sketchybar service..."
 brew services start sketchybar
+
+echo "Setup complete! You may need to restart your Mac for all changes to take effect."
