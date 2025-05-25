@@ -98,7 +98,7 @@ done
 # Installing casks
 echo "Installing cask applications..."
 BREW_CASKS=(
-    "ghostty"
+    "wezterm"
     "font-hack-nerd-font"
     "sf-symbols"
     "font-meslo-lg-nerd-font"
@@ -117,6 +117,10 @@ BREW_CASKS=(
     "dbngin"
     "textmate"
     "setapp"
+    "phpstorm"
+    "tinkerwell"
+    "ray"
+    "windsurf"
 )
 
 for cask in "${BREW_CASKS[@]}"; do
@@ -182,3 +186,16 @@ echo "Starting sketchybar service..."
 brew services start sketchybar
 
 echo "Setup complete! You may need to restart your Mac for all changes to take effect."
+# Ask user if they want to reboot
+echo ""
+echo "Would you like to reboot now? (Y/N)"
+read -r response
+case "$response" in
+    [Yy]|[Jj])
+        echo "Rebooting now..."
+        sudo shutdown -r now
+        ;;
+    *)
+        echo "Reboot skipped. Remember to reboot later to apply all changes."
+        ;;
+esac
