@@ -89,6 +89,7 @@ BREW_PACKAGES=(
     "yazi"
     "font-symbols-only-nerd-font"
     "lua"
+    "onedrive"
 )
 for package in "${BREW_PACKAGES[@]}"; do
     echo "Installing $package..."
