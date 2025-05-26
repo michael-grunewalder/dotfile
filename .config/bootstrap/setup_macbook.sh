@@ -121,6 +121,8 @@ BREW_CASKS=(
     "tinkerwell"
     "ray"
     "windsurf"
+    "postman"
+    "slack"
 )
 
 for cask in "${BREW_CASKS[@]}"; do
