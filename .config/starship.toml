@@ -1,131 +1,32 @@
-add_newline = false
-command_timeout = 1000
-format = """$os$username$hostname$ssh$kubernetes$directory$git_branch$git_status """
+# ~/.config/starship.toml
 
-# Drop ugly default prompt characters
+format = """
+$directory$git_branch$git_status$php$nodejs$character
+"""
+
 [character]
-success_symbol = ''
-error_symbol = ''
+success_symbol = "[➜](bold green) "
+error_symbol = "[✗](bold red) "
+vicmd_symbol = "[V](bold blue) "
 
-# ---
-
-[os]
-format = '[$symbol](bold white) '   
-disabled = false
-
-[os.symbols]
-Windows = ' '
-Arch = '󰣇'
-Ubuntu = ''
-Macos = '󰀵'
-
-# ---y
-
-# Shows the username
-[username]
-style_user = 'white bold'
-style_root = 'black bold'
-format = '[$user]($style) '
-disabled = false
-show_always = true
-
-# Shows the hostname
-[hostname]
-ssh_only = true
-format = "[🌐 $hostname](bold green) "
-disabled = false
-
-# Shows current directory
 [directory]
-truncation_length = 1
-truncation_symbol = '…/'
-home_symbol = '󰋜 ~'
-read_only_style = '197'
-read_only = '  '
-format = 'at [$path]($style)[$read_only]($read_only_style) '
+style = "bold blue"
+truncation_length = 3
+truncation_symbol = "…/"
 
-# SSH Connections
-[ssh]
-format = '[$symbol]($style) '
-symbol = '🌐 SSH'
-style = 'bold green'
-disabled = false
-
-# Shows current git branch
 [git_branch]
-symbol = ' '
-format = 'via [$symbol$branch]($style)'
-# truncation_length = 4
-truncation_symbol = '…/'
-style = 'bold green'
+format = " [$branch]($style)"
+style = "bold purple"
 
-# Shows current git status
 [git_status]
-format = '([ \( $all_status$ahead_behind\)]($style) )'
-style = 'bold green'
-conflicted = '[ confliced=${count}](red) '
-up_to_date = '[󰘽 up-to-date](green) '
-untracked = '[󰋗 untracked=${count}](red) '
-ahead = ' ahead=${count}'
-diverged = ' ahead=${ahead_count}  behind=${behind_count}'
-behind = ' behind=${count}'
-stashed = '[ stashed=${count}](green) '
-modified = '[󰛿 modified=${count}](yellow) '
-staged = '[󰐗 staged=${count}](green) '
-renamed = '[󱍸 renamed=${count}](yellow) '
-deleted = '[󰍶 deleted=${count}](red) '
+format = '([$all_status$ahead_behind]($style))'
+style = "bold yellow"
 
-# Shows kubernetes context and namespace
-[kubernetes]
-format = 'via [󱃾 $context\($namespace\)](bold purple) '
-disabled = false
-
-# ---
-
-[vagrant]
-disabled = true
-
-[docker_context]
-disabled = true
-
-[helm]
-disabled = true
-
-[python]
-disabled = true
+[php]
+format = ' via [🐘 $version]($style)'
+style = "bold green"
 
 [nodejs]
-disabled = true
-
-[ruby]
-disabled = true
-
-[terraform]
-disabled = true
-
-# In your starship.toml
-
-# This module sets a badge on your Warp tab when an SSH connection is active.
-[custom.warp_ssh_badge]
-description = "Set Warp tab badge for SSH sessions"
-# This condition checks if the SSH_CONNECTION environment variable is set (indicating an active SSH session).
-when = "[ -n \"$SSH_CONNECTION\" ]"
-# This command uses Warp's built-in functionality to set a badge.
-# You can customize the badge text and icon (e.g., 'SSH 🛰️', 'REMOTE', or just an icon).
-command = "warp :shell_integration:badge 'SSH 🛰️'"
-# Specifies the shell to execute the command. 'bash' or 'sh' are generally safe choices.
-# This assumes the `warp` command is accessible in the subshell's PATH.
-shell = ["bash", "-c"]
-# This module's purpose is to run the command, not to print text into the prompt itself.
-format = ""
-
-# This module clears the badge when you are no longer in an SSH session (e.g., after typing 'exit').
-[custom.warp_clear_badge]
-description = "Clear Warp tab badge when not in an SSH session"
-# This condition checks if the SSH_CONNECTION variable is NOT set.
-when = "[ -z \"$SSH_CONNECTION\" ]"
-# Command to clear the badge.
-command = "warp :shell_integration:badge ''"
-shell = ["bash", "-c"]
-format = ""
+format = ' via [⬢ $version]($style)'
+style = "bold green"
 

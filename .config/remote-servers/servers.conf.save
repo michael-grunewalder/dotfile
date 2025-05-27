@@ -1,0 +1,15 @@
+
+
+
+
+
+
+
+
+
+# Format: GROUP:user@host.domain.com
+# Example entries:
+Work:admin@server1.work.com
+Work:user@server2.work.com
+Home:pi@raspberrypi.local
+Private:user@personal-server.com
