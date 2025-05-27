@@ -1,6 +1,6 @@
 add_newline = false
 command_timeout = 1000
-format = """$os$username$hostname$kubernetes$directory$git_branch$git_status """
+format = """$os$username$hostname$ssh$kubernetes$directory$git_branch$git_status """
 
 # Drop ugly default prompt characters
 [character]
@@ -31,8 +31,8 @@ show_always = true
 
 # Shows the hostname
 [hostname]
-ssh_only = false
-format = 'on [$hostname](bold yellow) '
+ssh_only = true
+format = "[🌐 $hostname](bold green) "
 disabled = false
 
 # Shows current directory
@@ -43,6 +43,13 @@ home_symbol = '󰋜 ~'
 read_only_style = '197'
 read_only = '  '
 format = 'at [$path]($style)[$read_only]($read_only_style) '
+
+# SSH Connections
+[ssh]
+format = '[$symbol]($style) '
+symbol = '🌐 SSH'
+style = 'bold green'
+disabled = false
 
 # Shows current git branch
 [git_branch]
@@ -95,3 +102,30 @@ disabled = true
 
 [terraform]
 disabled = true
+
+# In your starship.toml
+
+# This module sets a badge on your Warp tab when an SSH connection is active.
+[custom.warp_ssh_badge]
+description = "Set Warp tab badge for SSH sessions"
+# This condition checks if the SSH_CONNECTION environment variable is set (indicating an active SSH session).
+when = "[ -n \"$SSH_CONNECTION\" ]"
+# This command uses Warp's built-in functionality to set a badge.
+# You can customize the badge text and icon (e.g., 'SSH 🛰️', 'REMOTE', or just an icon).
+command = "warp :shell_integration:badge 'SSH 🛰️'"
+# Specifies the shell to execute the command. 'bash' or 'sh' are generally safe choices.
+# This assumes the `warp` command is accessible in the subshell's PATH.
+shell = ["bash", "-c"]
+# This module's purpose is to run the command, not to print text into the prompt itself.
+format = ""
+
+# This module clears the badge when you are no longer in an SSH session (e.g., after typing 'exit').
+[custom.warp_clear_badge]
+description = "Clear Warp tab badge when not in an SSH session"
+# This condition checks if the SSH_CONNECTION variable is NOT set.
+when = "[ -z \"$SSH_CONNECTION\" ]"
+# Command to clear the badge.
+command = "warp :shell_integration:badge ''"
+shell = ["bash", "-c"]
+format = ""
+
