@@ -46,18 +46,42 @@ truncation_length = 3
 truncation_symbol = "…/"
 
 [git_branch]
-format = " [$branch]($style)"
+symbol = ' '
+format = " [$branch]($style) "
+#format = 'via [$symbol$branch]($style)'
+# truncation_length = 4
+truncation_symbol = '…/'
+# format = '\([$branch]($style) '
+only_attached = true
 style = "bold purple"
 
 [git_status]
-format = '([$all_status$ahead_behind]($style))'
-style = "bold yellow"
+format = '([\( $all_status$ahead_behind\)]($style))'
+style = 'bold green'
+conflicted = '[ confliced=${count}](red) '
+up_to_date = '[󰘽 up-to-date](green) '
+untracked = '[󰋗 untracked=${count}](red) '
+ahead = ' ahead=${count}'
+diverged = ' ahead=${ahead_count}  behind=${behind_count}'
+behind = ' behind=${count}'
+stashed = '[ stashed=${count}](green) '
+modified = '[󰛿 modified=${count}](yellow) '
+staged = '[󰐗 staged=${count}](green) '
+renamed = '[󱍸 renamed=${count}](yellow) '
+deleted = '[󰍶 deleted=${count}](red) '
+
+[git_commit]
+format = '\([$hash]($style)'
+style = "red"
 
 [php]
-format = ' via [🐘 $version]($style)'
+format = ' [🐘 $version]($style)'
 style = "bold green"
 
 [nodejs]
-format = ' via [⬢ $version]($style)'
+format = ' [⬢ $version]($style)'
 style = "bold green"
+
+
+
 
