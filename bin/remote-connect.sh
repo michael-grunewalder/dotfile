@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+clear
 
 CONFIG_FILE="$HOME/.config/remote-servers/servers.conf"
 
