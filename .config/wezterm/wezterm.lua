@@ -1,22 +1,46 @@
 local wezterm = require("wezterm")
-local config = wezterm.config_builder()
-config.font = wezterm.font("MesloLGS Nerd Font")
-config.font_size = 19
-config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.7
-config.macos_window_background_blur = 11
-config.enable_tab_bar = false
 
-config.colors = {
-	foreground = "#CBE0F0",
-	background = "#011423",
-	cursor_bg = "#47FF9C",
-	cursor_border = "#47FF9C",
-	cursor_fg = "#011423",
-	selection_bg = "#033259",
-	selection_fg = "#CBE0F0",
-	ansi = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#0FC5ED", "#a277ff", "#24EAF7", "#24EAF7" },
-	brights = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#A277FF", "#a277ff", "#24EAF7", "#24EAF7" },
+config = wezterm.config_builder()
+
+config = {
+	automatically_reload_config = true,
+	font = wezterm.font("MesloLGS Nerd Font"),
+	font_size = 16,
+	window_decorations = "RESIZE",
+	-- window_background_opacity = 0.7,
+	macos_window_background_blur = 11,
+	enable_tab_bar = false,
+	default_cursor_style = "BlinkingUnderline",
+	color_scheme = "Nord (Gogh)",
+	background = {
+		{
+			source = {
+				File = "/Users/michael.grunewalder/.config/assets/wallpaper.png",
+			},
+			hsb = {
+				hue = 1.0,
+				saturation = 1.02,
+				brightness = 0.25,
+			},
+			width = "100%",
+			height= "100%",
+		},
+		{
+			source = {
+				Color = "#282c35",
+			},
+			width = "100%",
+			height = "100%",
+			opacity = 0.75,
+		}
+		
+	},
+	window_padding = {
+		left = 20, 
+		right = 20,
+		top = 10,
+		bottom = 10,
+	}
 }
 
 return config
