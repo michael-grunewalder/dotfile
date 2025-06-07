@@ -1,3 +1,7 @@
 exit
 herd tld test
 exit
+ray('hello world');
+exit
+ray('hello world');
+exit

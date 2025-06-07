@@ -6,7 +6,6 @@ alias la='eza -a --icons=always --group-directories-first' # Show all files, wit
 alias lx='eza -a --icons=always --group-directories-first --extended' # Show all files and extended attributes, directories first
 alias tree='eza --icons=always --tree' # Tree view
 alias lS='eza --oneline--icons=always' # Display one entry per line
-
 artisan() {
   local dir="$PWD"
   while [ "$dir" != "/" ]; do
@@ -19,3 +18,5 @@ artisan() {
   echo "No artisan script found in this directory or any parent directories."
   return 1
 }
+alias find='fd'
+alias cat='bat'

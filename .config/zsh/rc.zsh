@@ -11,6 +11,7 @@ source_if_exists $HOME/.config/zsh/zsh/git.zsh
 source_if_exists $HOME/.config/zsh/aliases.zsh
 source_if_exists $HOME/.config/zsh/functions.zsh
 source_if_exists $HOME/.config/zsh/herd.zsh
+source_if_exists $HOME/.config/zsh/settings.zsh
 
 precmd() {
     source $HOME/.config/zsh/aliases.zsh
