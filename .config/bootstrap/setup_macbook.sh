@@ -66,6 +66,7 @@ brew update
 # Installing apps from Homebrew
 echo "Installing Homebrew packages..."
 BREW_PACKAGES=(
+    "atuin"
     "bat"
     "eza"
     "fd"
@@ -169,10 +170,11 @@ echo "****DONE****"
 
 # Changing macOS defaults
 echo "Changing macOS defaults..."
+mkdir "$HOME/Desktop/Screenshots"
 defaults write NSGlobalDomain _HIHideMenuBar -bool true
-defaults write NSGlobalDomain AppleHighlightColor -string "0.47 0.65 0.9"
+# defaults write NSGlobalDomain AppleHighlightColor -string "0.47 0.65 0.9"
 defaults write NSGlobalDomain AppleAccentColor -int 1
-defaults write com.apple.screencapture location -string "$HOME/Desktop"
+defaults write com.apple.screencapture location -string "$HOME/Desktop/Screenshots"
 defaults write com.apple.screencapture disable-shadow -bool false
 defaults write com.apple.screencapture type -string "png"
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
@@ -192,6 +194,9 @@ curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.
 # Start sketchybar service
 echo "Starting sketchybar service..."
 brew services start sketchybar
+
+#logging into atuin
+atuin login
 
 echo "Setup complete! You may need to restart your Mac for all changes to take effect."
 # Ask user if they want to reboot
