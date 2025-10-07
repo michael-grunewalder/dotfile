@@ -105,7 +105,7 @@ done
 # Installing casks
 echo "Installing cask applications..."
 BREW_CASKS=(
-    "wezterm"
+#    "wezterm"
     "font-hack-nerd-font"
     "sf-symbols"
     "font-meslo-lg-nerd-font"
@@ -114,7 +114,7 @@ BREW_CASKS=(
     "visual-studio-code"
     "font-sf-pro"
     "warp"
-    "font-sketchybar-app-font"
+#    "font-sketchybar-app-font"
     "appcleaner"
     "herd"
     "opera-air"
@@ -130,6 +130,7 @@ BREW_CASKS=(
     "windsurf"
     "postman"
     "slack"
+    "upscayl"
 )
 
 for cask in "${BREW_CASKS[@]}"; do
@@ -183,20 +184,21 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 defaults write com.apple.finder ShowStatusBar -bool false
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-defaults write 'Apple Global Domain' _HIHideMenuBar -bool true
+#defaults write 'Apple Global Domain' _HIHideMenuBar -bool true
 
 # Menu Bar setup
-echo "Setting up Menu Bar..."
-brew tap FelixKratz/formulae
-brew install sketchybar
-curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
-(git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
+#echo "Setting up Menu Bar..."
+#brew tap FelixKratz/formulae
+#brew install sketchybar
+#curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+#(git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
+
 # Start sketchybar service
-echo "Starting sketchybar service..."
-brew services start sketchybar
+#echo "Starting sketchybar service..."
+#brew services start sketchybar
 
 #logging into atuin
-atuin login
+#atuin login
 
 echo "Setup complete! You may need to restart your Mac for all changes to take effect."
 # Ask user if they want to reboot
