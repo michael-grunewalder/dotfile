@@ -105,33 +105,49 @@ done
 # Installing casks
 echo "Installing cask applications..."
 BREW_CASKS=(
-#    "wezterm"
+    #Fonts
     "font-hack-nerd-font"
     "sf-symbols"
     "font-meslo-lg-nerd-font"
-    "sublime-text"
     "font-sf-mono"
-    "visual-studio-code"
     "font-sf-pro"
-    "warp"
-#    "font-sketchybar-app-font"
-    "appcleaner"
-    "herd"
-    "opera-air"
-    "arc"
+    #Editors 
+    "sublime-text"
+    "textmate"
+    #IDE
+    "visual-studio-code"
+    "phpstorm"
+    "antigravity"
+    #Web Browser
     "google-chrome"
     "firefox"
-    "dbngin"
-    "textmate"
-    "setapp"
-    "phpstorm"
-    "tinkerwell"
-    "ray"
-    "windsurf"
-    "postman"
-    "slack"
+    "zen"
+    "opera-air"
+    "brave-browser"
+    #Foto & Video
+    "amazon-photos"
     "upscayl"
-)
+    #Utilities
+    "apple-juice"
+    "blip"
+    "brewy"
+    "appcleaner"
+    "orbstack"
+    "setapp"
+    #Finder Replacement
+    "bloom"
+    #Messaging
+    "beeper"
+    #Teminal
+    "warp"
+    "wezterm"
+    #Disabled
+    #"font-sketchybar-app-font"
+    #"herd"
+    #"dbngin"
+    #"tinkerwell"
+    #"ray"    
+    )
 
 for cask in "${BREW_CASKS[@]}"; do
     echo "Installing $cask..."
