@@ -173,6 +173,17 @@ MAS_APPS=(
     "1436522307:Transmit 5"
     "1352778147:Bitwarden"
     "1354318707:Core Tunnel"
+    "1631624924:Final Cut Pro"
+    "6743048714:Googly Eyes"
+    "1452453066:Hidden Bar"
+    "1615087040:Logic Pro"
+    "6746637089:MainStage"
+    "6754022187:Menu Drop"
+    "1564329434:Momentum"
+    "6746637149:Motion"
+    "361304891:Numbers"
+    "361309726:Pages"
+    "6746662575:Pixelmator Pro
 )
 
 for app in "${MAS_APPS[@]}"; do
@@ -188,7 +199,7 @@ echo "****DONE****"
 # Changing macOS defaults
 echo "Changing macOS defaults..."
 mkdir "$HOME/Desktop/Screenshots"
-defaults write NSGlobalDomain _HIHideMenuBar -bool true
+# defaults write NSGlobalDomain _HIHideMenuBar -bool true
 # defaults write NSGlobalDomain AppleHighlightColor -string "0.47 0.65 0.9"
 defaults write NSGlobalDomain AppleAccentColor -int 1
 defaults write com.apple.screencapture location -string "$HOME/Desktop/Screenshots"
