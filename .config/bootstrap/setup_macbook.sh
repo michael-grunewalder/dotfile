@@ -143,10 +143,11 @@ BREW_CASKS=(
     "wezterm"
     #Disabled
     #"font-sketchybar-app-font"
-    #"herd"
-    #"dbngin"
-    #"tinkerwell"
-    #"ray"    
+    "herd"
+    "dbngin"
+    "tinkerwell"
+    "ray"
+    "helo!"
     )
 
 for cask in "${BREW_CASKS[@]}"; do
