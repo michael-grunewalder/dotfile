@@ -184,7 +184,7 @@ MAS_APPS=(
     "6746637149:Motion"
     "361304891:Numbers"
     "361309726:Pages"
-    "6746662575:Pixelmator Pro
+    "6746662575:Pixelmator Pro"
 )
 
 for app in "${MAS_APPS[@]}"; do
